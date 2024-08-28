@@ -3,7 +3,7 @@
 SELECT*
 FROM CryptoData
 LIMIT 10;
-
+![alt text](Crypto project/Results/1.jpeg)
 -- understand volatility of bitcoin daily and annually
 
 SELECT stddev(interdaychangepercent) AS dailyvolatility,
