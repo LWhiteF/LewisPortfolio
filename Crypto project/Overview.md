@@ -1,24 +1,25 @@
+```SQL
 -- view limited data set, understand fields
 
 SELECT*
 FROM CryptoData
 LIMIT 10;
-
+```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/1.jpeg)
-
+```SQL
 -- understand volatility of bitcoin daily and annually
 
-SELECT stddev(interdaychangepercent) AS dailyvolatility,
-		stddev(interdaychangepercent) * SQRT(365) AS annualvolatility
-FROM (SELECT crypto_name,
-		date,
-		close,
-		(close / LAG(close, 1) OVER(ORDER BY date)) - 1 AS interdaychangepercent
-FROM CryptoData
-WHERE crypto_name = 'Bitcoin');
-
+SELECT stddev(interdaychangepercent) AS dailyvolatility,<br>
+		stddev(interdaychangepercent) * SQRT(365) AS annualvolatility<br>
+FROM (SELECT crypto_name,<br>
+		date,<br>
+		close,<br>
+		(close / LAG(close, 1) OVER(ORDER BY date)) - 1 AS interdaychangepercent<br>
+FROM CryptoData<br>
+WHERE crypto_name = 'Bitcoin');<br>
+```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/2.JPG)
-
+```SQL
 -- Create CTE with weekly average close prices for Eth, Eth Classic, Bitcoin and Bitcoin cash
 -- Join CTEs for easier comparison
 
@@ -75,9 +76,9 @@ ON bw.b_weekly = bcw.bcw_weekly
 FULL JOIN ecw
 ON bw.b_weekly = ecw.ecw_weekly
 ORDER BY bw.b_weekly;
-
+```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/3.JPG)
-
+```SQL
 -- build a temp correlation table
 
 CREATE TEMP TABLE correlation AS
@@ -118,9 +119,9 @@ SELECT crypto,
        ROUND(bitcoin_cash::numeric, 2) AS bitcoin_cash,
 	   ROUND(ethereum_classic::numeric, 2) AS ethereum_classic
   FROM correlation;
-
+```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/4.JPG)
-
+```SQL
 -- build offset table based on previos CTE template
 
 WITH bw AS
@@ -176,9 +177,9 @@ ON bw.b_weekly = bcw.bcw_weekly
 FULL JOIN ecw
 ON bw.b_weekly = ecw.ecw_weekly
 ORDER BY bw.b_weekly;
-
+```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/5.JPG)
-
+```SQL
 -- Create temp correlation table for weekly offset prices
 
 CREATE TEMP TABLE correlation_offset AS
@@ -219,9 +220,9 @@ SELECT crypto,
        ROUND(bitcoin_cash_o::numeric, 2) AS bitcoin_cash_o,
 	   ROUND(ethereum_classic_o::numeric, 2) AS ethereum_classic_o
   FROM correlation_offset;
-
+```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/6.JPG)
-
+```SQL
 -- explore daily close price correlation for bitcoin and eth
 
 SELECT CORR(bitclose, ethclose)
@@ -230,9 +231,9 @@ FROM (SELECT c1.crypto_name, c1.date, c1.close AS bitclose, c2.close AS ethclose
 		INNER JOIN CryptoData AS c2
 		ON c1.date=c2.date
 		WHERE c1.crypto_name = 'Bitcoin' AND c2.crypto_name = 'Ethereum');
-
+```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/7.JPG)
-
+```SQL
 -- Explore correlation for daily price change
 
 SELECT CORR(bit_change, eth_change) AS bit_eth,
@@ -247,5 +248,5 @@ FROM (SELECT (c1.close-c1.open) AS bit_change,
 	    INNER JOIN CryptoData AS c3
 	    ON c1.date = c3.date
 		WHERE c1.crypto_name = 'Bitcoin' AND c2.crypto_name = 'Ethereum' AND c3.crypto_name = 'Ethereum Classic';
-
+```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/8.JPG)
