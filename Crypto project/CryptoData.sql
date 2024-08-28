@@ -1,2 +1,3 @@
 SELECT*
 FROM CryptoData
+LIMIT 10;
