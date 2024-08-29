@@ -1,3 +1,9 @@
+# Deep Diving Crypto Currencies
+
+The aim is to understand the volitilty fo cryptocurrencies and try to find correlationary trends between major currencies in order to create a predictive model.
+
+## The Dataset
+
 ```SQL
 -- view limited data set, understand fields
 
@@ -6,19 +12,35 @@ FROM CryptoData
 LIMIT 10;
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/1.jpeg)
+
+### Volatility
+Bitcoin is described as a volatile currency, making it a bad investment choice. <br>
+Below we use calculations on 10 years of bitcoin data to find how the price deviates daily and annually.
+We find that daily we can expect the price to deviate 4% from its starting position.
+annually, we can expect the price to deviate from its starting position by 80%.<br>
+The S&P500 Index has a Standard Deviation of approximatly 15% annually. Showing that Bitcoin is 5 times more volatile than traditional investment options.<br> 
+<br>
+What does this mean<br>
+If we held Bitcoin for a year we could expect to see a gain or loss of 80% of our value by the end of that year. Bitcoin should not be considered for a long term investment approach.<br>
+However, we are presented with a high risk, high reward trading opportunity.
 ```SQL
 -- understand volatility of bitcoin daily and annually
 
-SELECT stddev(interdaychangepercent) AS dailyvolatility,<br>
-		stddev(interdaychangepercent) * SQRT(365) AS annualvolatility<br>
-FROM (SELECT crypto_name,<br>
-		date,<br>
-		close,<br>
-		(close / LAG(close, 1) OVER(ORDER BY date)) - 1 AS interdaychangepercent<br>
-FROM CryptoData<br>
-WHERE crypto_name = 'Bitcoin');<br>
+SELECT stddev(interdaychangepercent) AS dailyvolatility,
+		stddev(interdaychangepercent) * SQRT(365) AS annualvolatility
+FROM (SELECT crypto_name,
+		date,
+		close,
+		(close / LAG(close, 1) OVER(ORDER BY date)) - 1 AS interdaychangepercent
+FROM CryptoData
+WHERE crypto_name = 'Bitcoin');
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/2.JPG)
+
+### Weekly Avarage Closing price
+Here we use CTE's to create to find average weekly closing price for 4 major crypto currencies. By using CTE's we are able to create a direct comparison between each currency
+side by side by joining them on their date bin.<br>
+Some values are left as NULL as those currencies did not exist in those date ranges. we do not set these to null as we dont want them to skew later correlation calculations.
 ```SQL
 -- Create CTE with weekly average close prices for Eth, Eth Classic, Bitcoin and Bitcoin cash
 -- Join CTEs for easier comparison
@@ -78,6 +100,12 @@ ON bw.b_weekly = ecw.ecw_weekly
 ORDER BY bw.b_weekly;
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/3.JPG)
+
+### Weekly Average Closing Price Correlation 
+Created a temporary table, based upon the previous data, that compares how the weekly averages correlate<br>
+As we can see Bitcoin and Ethereum correlate extremely strongly, Bitcoin and Ethereum Classic correlate fairly strongly and Bitcoin and Bitcoin Cash have no correlation.<br>
+Ethereum and Bitcoin Cash have no correlation, where as Ethereum and Ethereum Classic have a strong relationship. <br>
+Bitcoin Cash and Ethereum Classic have a weak positive relationship.
 ```SQL
 -- build a temp correlation table
 
@@ -121,6 +149,10 @@ SELECT crypto,
   FROM correlation;
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/4.JPG)
+
+### Weekly Averages Offset
+We modify the previous weekly average query to offset the prices of Ethereum, Ethereum Classic and Bitcoin Cash from Bitcoin by one week to see how this affects the relationship between the prices.
+we do this by using the CTE's and a window function to Lag them by one position.
 ```SQL
 -- build offset table based on previos CTE template
 
@@ -179,6 +211,11 @@ ON bw.b_weekly = ecw.ecw_weekly
 ORDER BY bw.b_weekly;
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/5.JPG)
+
+### Weekly Average Offset correlation.
+By recreating the correlation table,
+we can see that the offset prices do not have a significant change to the price correlation.
+
 ```SQL
 -- Create temp correlation table for weekly offset prices
 
@@ -222,15 +259,25 @@ SELECT crypto,
   FROM correlation_offset;
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/6.JPG)
-```SQL
--- explore daily close price correlation for bitcoin and eth
 
-SELECT CORR(bitclose, ethclose)
-FROM (SELECT c1.crypto_name, c1.date, c1.close AS bitclose, c2.close AS ethclose, c2.date, c2.crypto_name
-		FROM CryptoData AS c1
-		INNER JOIN CryptoData AS c2
-		ON c1.date=c2.date
-		WHERE c1.crypto_name = 'Bitcoin' AND c2.crypto_name = 'Ethereum');
+### Daily Prices Exploration
+From the weekly explorations into cryptocurrency prices, we should dive deeper into the relationships between Bitcoin, Ethereum and Ethereum Classic.
+
+
+```SQL
+-- explore daily price changes of Bitcoin, Ethereum and Ethereum classic 
+
+SELECT c1.date,
+		(c1.close-c1.open) AS bit_change,
+		(c2.close-c2.open) AS eth_change,
+		(c3.close-c3.open) AS ecla_change
+FROM CryptoData AS c1
+INNER JOIN CryptoData AS c2
+ON c1.date = c2.date
+INNER JOIN CryptoData AS c3
+ON c1.date = c3.date
+WHERE c1.crypto_name = 'Bitcoin' AND c2.crypto_name = 'Ethereum' AND c3.crypto_name = 'Ethereum Classic'
+ORDER BY c1.date;;
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/7.JPG)
 ```SQL
