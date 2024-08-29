@@ -280,6 +280,10 @@ WHERE c1.crypto_name = 'Bitcoin' AND c2.crypto_name = 'Ethereum' AND c3.crypto_n
 ORDER BY c1.date;;
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/7.JPG)
+
+Use a subquery to pull this data into a correlation table. As we can see the price changes between Ethereum and Bitcoin have a strong positive relationship, we can leverage this to make day trades.
+Should we see a significant dips or gains in Ethereum or Bitcoin, we can sell and buy the other coin with relative security that the prices trend together.
+
 ```SQL
 -- Explore correlation for daily price change
 
