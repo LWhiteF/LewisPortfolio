@@ -261,8 +261,31 @@ SELECT crypto,
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/6.JPG)
 
 ### Daily Prices Exploration
-From the weekly explorations into cryptocurrency prices, we should dive deeper into the relationships between Bitcoin, Ethereum and Ethereum Classic.
+From the weekly explorations into cryptocurrency prices, we should dive deeper into the relationships between Bitcoin, Ethereum and Ethereum Classic.<br>
+<br>
+While the average close price weekly might have strong realtionships, how do the daily close prices correlate? 
+```SQL
+SELECT CORR(bitclose, ethclose)
+FROM (SELECT c1.crypto_name, c1.date, c1.close AS bitclose, c2.close AS ethclose, c2.date, c2.crypto_name
+		FROM CryptoData AS c1
+		INNER JOIN CryptoData AS c2
+		ON c1.date=c2.date
+		WHERE c1.crypto_name = 'Bitcoin' AND c2.crypto_name = 'Ethereum') AS dailyclose;
 
+SELECT CORR(ec_close, b_close)
+FROM (SELECT c1.crypto_name, c1.date, c1.close AS ec_close, c2.close AS b_close, c2.date, c2.crypto_name
+		FROM CryptoData AS c1
+		INNER JOIN CryptoData AS c2
+		ON c1.date=c2.date
+		WHERE c1.crypto_name = 'Ethereum Classic' AND c2.crypto_name = 'Bitcoin');
+
+SELECT CORR(ec_close, e_close)
+FROM (SELECT c1.crypto_name, c1.date, c1.close AS ec_close, c2.close AS e_close, c2.date, c2.crypto_name
+		FROM CryptoData AS c1
+		INNER JOIN CryptoData AS c2
+		ON c1.date=c2.date
+		WHERE c1.crypto_name = 'Ethereum Classic' AND c2.crypto_name = 'Ethereum');
+```
 
 ```SQL
 -- explore daily price changes of Bitcoin, Ethereum and Ethereum classic 
@@ -277,7 +300,7 @@ ON c1.date = c2.date
 INNER JOIN CryptoData AS c3
 ON c1.date = c3.date
 WHERE c1.crypto_name = 'Bitcoin' AND c2.crypto_name = 'Ethereum' AND c3.crypto_name = 'Ethereum Classic'
-ORDER BY c1.date;;
+ORDER BY c1.date;
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/7.JPG)
 
