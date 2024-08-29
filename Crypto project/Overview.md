@@ -286,6 +286,11 @@ FROM (SELECT c1.crypto_name, c1.date, c1.close AS ec_close, c2.close AS e_close,
 		ON c1.date=c2.date
 		WHERE c1.crypto_name = 'Ethereum Classic' AND c2.crypto_name = 'Ethereum');
 ```
+| Bitcoin/Ethereum | Bitcoin/Ethereum Classic | Ethereum/Ethereum Classic |
+| :--------------: | :----------------------: | :-----------------------: |
+|0.9335806378080176|    0.7195929252612439    |    0.8440297895831277     |
+
+As we can see the correlation relationships are strong between these three currencies, indicating that their markets are linked
 
 ```SQL
 -- explore daily price changes of Bitcoin, Ethereum and Ethereum classic 
