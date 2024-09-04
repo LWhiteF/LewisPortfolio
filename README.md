@@ -9,5 +9,5 @@ The aim of this project is to attempt to find a solution for an investment strat
 ##Manufaturing Defects Report PowerBi
 This is a visual presentation project highlighting the cost and scope of manufacturing defects.<br>
 
-[Manufacturing Defects BI file](https://github.com/LWhiteF/LewisPortfolio/blob/9883c8ee522b50cecec560b95856f7de4d19c87b/Manufacturing%20Project/defects.pbix)
+[Manufacturing Defects BI file](https://github.com/LWhiteF/LewisPortfolio/blob/9883c8ee522b50cecec560b95856f7de4d19c87b/Manufacturing%20Project/defects.pbix)<br>
 [Report View](https://github.com/LWhiteF/LewisPortfolio/blob/9883c8ee522b50cecec560b95856f7de4d19c87b/Manufacturing%20Project/Overview.md)
