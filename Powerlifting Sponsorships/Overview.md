@@ -128,15 +128,15 @@ To ensure the company is happy with the location of these athletes we again find
 [Distrubution of Athletes in Europe:](https://github.com/LWhiteF/LewisPortfolio/blob/6fb96132ff61392d19adbec8136d7c79bb4b1a6d/Powerlifting%20Sponsorships/EuropeanAthletesPerc.csv)
 |Country|Count|Percentage(Rounded)|
 |:---:|:---:|:---:|
-|Ireland|6|5.0|
-|France|23|19.3|
-|Scotland|1|0.8|
-|Netherlands|5|4.2|
-|UK|2|1.7|
-|Belgium|4|3.4|
-|Germany|29|24.4|
-|England|25|21.0|
-|Norway|24|20.2|
+|Ireland|10|7.6|
+|France|19|14.4|
+|Netherlands|5|3.8|
+|UK|1|0.8|
+|Belgium|4|3|
+|Italy|19|14.4|
+|Germany|28|21.2|
+|England|22|16.7|
+|Norway|24|18.2|
 
 ## Further Analysis
 ### Future English Prospects
