@@ -1,7 +1,7 @@
 WITH eu AS (SELECT DISTINCT country
 				FROM ipfrecords
 				WHERE country IN('Belgium', 'England', 'France', 'Germany',
-								'Ireland', 'italy', 'Netherlands', 'Norway',
+								'Ireland', 'Italy', 'Netherlands', 'Norway',
 								 'Scotland', 'UK', 'Wales')),
 								 
 shortlist AS (SELECT name,
