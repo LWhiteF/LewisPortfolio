@@ -121,11 +121,11 @@ ORDER BY name, country;
 ```
 This presents a list of 132 sponsorship candidates that fit within the companies new criteria, ranking at least 25th for strength in their respective weightclass and genders, while also having competed successfully at least 3 times within the past 5 years.
 
-[European Athletes to Sponsor](https://github.com/LWhiteF/LewisPortfolio/blob/61320d758adcc2e095cbcd3b09f1d8089c2272bd/Powerlifting%20Sponsorships/EuropeanAthletestoSponsor.csv)
+[European Athletes to Sponsor](https://github.com/LWhiteF/LewisPortfolio/blob/ce81c616f3df73b4196862c34e2457158d32ba9d/Powerlifting%20Sponsorships/EuropeanAthletestoSponsor.csv)
 
 To ensure the company is happy with the location of these athletes we again find the proportional representation.
 
-[Distrubution of Athletes in Europe:](https://github.com/LWhiteF/LewisPortfolio/blob/6fb96132ff61392d19adbec8136d7c79bb4b1a6d/Powerlifting%20Sponsorships/EuropeanAthletesPerc.csv)
+[Distrubution of Athletes in Europe:](https://github.com/LWhiteF/LewisPortfolio/blob/ce81c616f3df73b4196862c34e2457158d32ba9d/Powerlifting%20Sponsorships/EuropeanAthletesPerc.csv)
 |Country|Count|Percentage(Rounded)|
 |:---:|:---:|:---:|
 |Ireland|10|7.6|
