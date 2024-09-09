@@ -137,3 +137,68 @@ To ensure the company is happy with the location of these athletes we again find
 |Germany|29|24.4|
 |England|25|21.0|
 |Norway|24|20.2|
+
+## Further Analysis
+### Future English Prospects
+Further analysis shows some hopeful prospects for sponsorship. we have looked at individuals who have competed in England more than 5 times in 2024, successfully completing all three events and having a total recorded.
+```SQL
+WITH competition AS (SELECT name,
+				weightclasskg,
+				sex,
+				date,
+				best3squatkg,
+				best3benchkg,
+				best3deadliftkg,
+				totalkg,
+				ROW_NUMBER() OVER(PARTITION BY name ORDER BY date) AS comps
+			FROM ipfrecords
+			WHERE date >= '2024-01-01' AND country = 'England' AND event = 'SBD'
+			ORDER BY name, date)
+
+
+SELECT distinct on (name)
+name, weightclasskg, sex
+FROM competition
+WHERE competition IS NOT NULL AND comps>=5
+ORDER BY name, date
+```
+[Output](https://github.com/LWhiteF/LewisPortfolio/blob/72ec39625be86d1414560f919502b07aa8137ff3/Powerlifting%20Sponsorships/2024SBDEng.csv)
+As Shown, there are 10 names that fit our criteria, when crossreferenced with our athletes in europe, 1 is already in the shortlist to be sponsored. However that still leaves 9 future prospects to be monitored for sponsorship. Successfully competing 5 times in one year shows a high drive, and passion for powerlifting.
+
+### Career Length
+It is important to consider how long individuals spend competing in powerlifing, by looking at when an athlete first competed and comparing it with when they most recently competed, and disregarding individuals who only competed once we can take an average. This is important as it gives a rough metric of how often we need to be contracting new talent.
+
+```SQL
+WITH datediff AS(SELECT name, 
+		MAX(date) - MIN(date) AS dayscompeting
+		FROM ipfrecords
+		GROUP BY name)
+				
+SELECT ROUND(AVG(dayscompeting),2) AS averagecareer
+FROM datediff
+WHERE dayscompeting != 0
+```
+|Average Career|
+|:---:|
+|1338.82|
+
+We find that the average is 1338.82 days, or approximatly 3 Years 7 Months.<br>
+We should take this into consideration when setting up contracts for sponsorship, as we may contract individuals that are coming to an end of their competiton life.<br>
+<br>
+<br>
+By modifying the previous query, we can find the percentage of competitors that only compete once
+
+```SQL
+WITH datediff AS(SELECT name, 
+				MAX(date) - MIN(date) AS dayscompeting
+				FROM ipfrecords
+				GROUP BY name)
+
+SELECT dayscompeting, 
+		COUNT(*) AS total,
+ 		COUNT(*)/SUM(COUNT(*)) OVER() AS percentage
+FROM datediff
+Group By dayscompeting
+ORDER BY dayscompeting
+```
+
