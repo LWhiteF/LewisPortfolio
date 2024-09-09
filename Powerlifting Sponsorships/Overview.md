@@ -182,7 +182,7 @@ WHERE dayscompeting != 0
 |:---:|
 |1338.82|
 
-We find that the average is 1338.82 days, or approximatly 3 Years 7 Months.<br>
+looking at all 58 years of records, we find that the average is 1338.82 days, or approximatly 3 Years 7 Months.<br>
 We should take this into consideration when setting up contracts for sponsorship, as we may contract individuals that are coming to an end of their competiton life.<br>
 <br>
 <br>
@@ -201,4 +201,5 @@ FROM datediff
 Group By dayscompeting
 ORDER BY dayscompeting
 ```
-
+[Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/30a48599b3ab6d9c252e37f0f5e308a194caefe3/Powerlifting%20Sponsorships/Percentagecompete.csv)
+As we can see, 52% of competitors globally, across 58 years of records, only compete once.
