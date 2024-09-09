@@ -97,7 +97,7 @@ we then set this up as another CTE called 'shortlist' from which we can create a
 WITH eu AS (SELECT DISTINCT country
             FROM ipfrecords
             WHERE country IN('Belgium', 'England', 'France', 'Germany',
-                              'Ireland', 'italy', 'Netherlands', 'Norway',
+                              'Ireland', 'Italy', 'Netherlands', 'Norway',
                               'Scotland', 'UK', 'Wales')),
 								 
 shortlist AS (SELECT name,
@@ -119,7 +119,7 @@ FROM shortlist
 WHERE competitions >= 3 AND rank <=25
 ORDER BY name, country;
 ```
-This presents a list of 119 sponsorship candidates that fit within the companies new criteria, ranking at least 25th for strength in their respective weightclass and genders, while also having competed successfully at least 3 times within the past 5 years.
+This presents a list of 132 sponsorship candidates that fit within the companies new criteria, ranking at least 25th for strength in their respective weightclass and genders, while also having competed successfully at least 3 times within the past 5 years.
 
 [European Athletes to Sponsor](https://github.com/LWhiteF/LewisPortfolio/blob/61320d758adcc2e095cbcd3b09f1d8089c2272bd/Powerlifting%20Sponsorships/EuropeanAthletestoSponsor.csv)
 
