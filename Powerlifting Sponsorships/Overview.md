@@ -162,8 +162,31 @@ FROM competition
 WHERE competition IS NOT NULL AND comps>=5
 ORDER BY name, date
 ```
-[Output](https://github.com/LWhiteF/LewisPortfolio/blob/72ec39625be86d1414560f919502b07aa8137ff3/Powerlifting%20Sponsorships/2024SBDEng.csv)
+[Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/72ec39625be86d1414560f919502b07aa8137ff3/Powerlifting%20Sponsorships/2024SBDEng.csv)<br>
 As Shown, there are 10 names that fit our criteria, when crossreferenced with our athletes in europe, 1 is already in the shortlist to be sponsored. However that still leaves 9 future prospects to be monitored for sponsorship. Successfully competing 5 times in one year shows a high drive, and passion for powerlifting.
+
+### Growth and Target Audience
+It is important that we consider how powerlifting has grown, and the ratio of athletes by gender, as this may have an effect on who we sponsor and how we market out products.
+```SQL
+SELECT *,
+	ROUND((competitors/totalyear)*100,1) AS Percentage
+FROM(SELECT *,
+		SUM(competitors) OVER(PARTITION BY yearly) AS totalyear
+	FROM (SELECT CAST(DATE_TRUNC('year', date) AS date) AS yearly,
+			sex,
+			COUNT(*) AS competitors
+		FROM ipfrecords
+		GROUP BY yearly, sex
+		ORDER BY yearly, sex));
+```
+[Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/ed0b8735624eeaf7e73c2fc3a01e14d66c2f8829/Powerlifting%20Sponsorships/GenderSplit.csv)<br>
+
+![alttext](https://github.com/LWhiteF/LewisPortfolio/blob/ed0b8735624eeaf7e73c2fc3a01e14d66c2f8829/Powerlifting%20Sponsorships/graphs.JPG)<br>
+
+We can see through this visualisation that powerlifting has grown from a male dominated sport to an approximatly 66/33% male/female split. we are also begining to see gender neutral competitors, though currently
+accounting for <1% of yearly competitors.<br>
+Powerlifting has also been growing exponentially. The dip seen in 1986 is caused by the formation of new powerlifting federations, whose data is not included in IPF records. The dip in 2020 was caused
+by shutdowns due to covid, and finally 2024 is incomplete.
 
 ### Career Length
 It is important to consider how long individuals spend competing in powerlifing, by looking at when an athlete first competed and comparing it with when they most recently competed, and disregarding individuals who only competed once we can take an average. This is important as it gives a rough metric of how often we need to be contracting new talent.
@@ -185,7 +208,6 @@ WHERE dayscompeting != 0
 looking at all 58 years of records, we find that the average is 1338.82 days, or approximatly 3 Years 7 Months.<br>
 We should take this into consideration when setting up contracts for sponsorship, as we may contract individuals that are coming to an end of their competiton life.<br>
 <br>
-<br>
 By modifying the previous query, we can find the percentage of competitors that only compete once
 
 ```SQL
@@ -201,5 +223,6 @@ FROM datediff
 Group By dayscompeting
 ORDER BY dayscompeting
 ```
-[Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/30a48599b3ab6d9c252e37f0f5e308a194caefe3/Powerlifting%20Sponsorships/Percentagecompete.csv)
+[Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/30a48599b3ab6d9c252e37f0f5e308a194caefe3/Powerlifting%20Sponsorships/Percentagecompete.csv)<br>
+
 As we can see, 52% of competitors globally, across 58 years of records, only compete once.
