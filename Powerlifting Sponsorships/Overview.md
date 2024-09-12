@@ -228,3 +228,41 @@ ORDER BY dayscompeting
 As we can see from the first row in the results, 52% of competitors globally, across 58 years of records, only compete once.<br>
 
 Further breaking this down, we can look if gender affects whether an athlete competes more than once, and if this has an effect on who we consider for sponsorhip.
+```SQL
+WITH datediff AS (SELECT name, sex,
+					MAX(date) - MIN(date) AS dayscompeting
+					FROM ipfrecords
+					GROUP BY name, sex),
+					
+sexcount AS (SELECT sex,
+				COUNT(*) AS total
+				FROM datediff
+				GROUP BY sex),
+				
+countmulti AS (SELECT sex,
+				COUNT(*) AS multicomp
+				FROM datediff
+				WHERE dayscompeting != 0
+				GROUP BY sex),
+
+countone AS (SELECT sex,
+				COUNT(*) AS onecomp
+				FROM datediff
+				WHERE dayscompeting = 0
+				GROUP BY sex)
+				
+SELECT sexcount.sex, total, multicomp, onecomp
+FROM sexcount
+LEFT JOIN countmulti
+ON sexcount.sex = countmulti.sex
+LEFT JOIN countone
+ON sexcount.sex = countone.sex
+```
+[Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/24faf1dce486341287a937368b2a1945ef2c87ca/Powerlifting%20Sponsorships/gendermulticomp.csv)<br>
+|sex|total|multicomp|onecomp|
+|:---:|:---:|:---:|:---:|
+|F|91833|46097|45736|
+|M|286352|135744|150608|
+|Mx|5|3|2|
+
+This aligns with the global statistics, that roughly 50% of competitors of any gender only once.
