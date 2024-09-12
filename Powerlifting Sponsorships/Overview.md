@@ -225,4 +225,6 @@ ORDER BY dayscompeting
 ```
 [Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/30a48599b3ab6d9c252e37f0f5e308a194caefe3/Powerlifting%20Sponsorships/Percentagecompete.csv)<br>
 
-As we can see, 52% of competitors globally, across 58 years of records, only compete once.
+As we can see from the first row in the results, 52% of competitors globally, across 58 years of records, only compete once.<br>
+
+Further breaking this down, we can look if gender affects whether an athlete competes more than once, and if this has an effect on who we consider for sponsorhip.
