@@ -2,6 +2,11 @@
 A fictional Powerlifting Equipment company, based in England, is looking for atheletes to sponsor to get visibility on their brand.<br>
 They want a list of potential candidates that will boost the brands profile and associate the brand with strength. We can use the International Powerlifting Federation Records, which date back to February 1966 and are regularly updated. 
 
+## Summary and Recommendations
+As initially requested, we have generated a list containing 174 athletes ranked at least 10th by strength for their strength globally from the 10 countries that powerlifting competitons are most numerous since 2019.
+We followed this up by generating a list of 132 European atheletes who have competed at least 3 times in the last 5 years, and are highly ranked for strength for their gender and respective weightclass. While this list is a good starting place, further analysis shows that the average competition career length is 3 years, 7 months.<br>As a result we recommend the company review the list of English competitiors generated that shows the athletes who have competed at least 5 times within 2024 alone.<br><br>
+To assist in choosing which athletes to sponsor, and to help the marketing department, we also looked into the demographics within powerlifting. We have found that powerlifting has grown from 100% male to a 66:33% ratio, male to female competitors repectively. We recommend tailoring marketing and sponsorships into a gender neutral balance to appeal to both audience groups and avoid alienation. This may also help grow female audience closer to a 50:50 ratio.
+
 ### Strongest Worldwide Lifters
 The company first asks for a list of the strongest lifters from the countries in which powerlifting already has a significant audience. <br>
 <br>
