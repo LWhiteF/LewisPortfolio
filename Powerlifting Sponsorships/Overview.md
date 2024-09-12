@@ -5,8 +5,8 @@ They want a list of potential candidates that will boost the brands profile and 
 ## Summary and Recommendations
 As initially requested, we have generated a list containing 174 athletes ranked at least 10th by strength for their strength globally from the 10 countries that powerlifting competitons are most numerous since 2019.
 We followed this up by generating a list of 132 European atheletes who have competed at least 3 times in the last 5 years, and are highly ranked for strength for their gender and respective weightclass. While this list is a good starting place, further analysis shows that the average competition career length is 3 years, 7 months.<br>As a result we recommend the company review the list of English competitiors generated that shows the athletes who have competed at least 5 times within 2024 alone.<br><br>
-To assist in choosing which athletes to sponsor, and to help the marketing department, we also looked into the demographics within powerlifting. We have found that powerlifting has grown from 100% male to a 66:33% ratio, male to female competitors repectively. We recommend tailoring marketing and sponsorships into a gender neutral balance to appeal to both audience groups and avoid alienation. This may also help grow female audience closer to a 50:50 ratio.
-
+To assist in choosing which athletes to sponsor, and to help the marketing department, we also looked into the demographics within powerlifting. We have found that powerlifting has grown from 100% male to a 66:33% ratio, male to female competitors repectively. We recommend tailoring marketing and sponsorships into a gender neutral balance to appeal to both audience groups and avoid alienation. This may also help grow female audience closer to a 50:50 ratio.<br><br>
+Age is another factor to consider, if we assume that the athletes are a representive sample of the general population and our audience, then we need to be focusing on the 16-34 age demographic
 ### Strongest Worldwide Lifters
 The company first asks for a list of the strongest lifters from the countries in which powerlifting already has a significant audience. <br>
 <br>
@@ -192,6 +192,22 @@ We can see through this visualisation that powerlifting has grown from a male do
 accounting for <1% of yearly competitors.<br>
 Powerlifting has also been growing exponentially. The dip seen in 1986 is caused by the formation of new powerlifting federations, whose data is not included in IPF records. The dip in 2020 was caused
 by shutdowns due to covid, and finally 2024 is incomplete.
+
+Age demgraphics is another factor to be considered when choosing who to sponsor, if we assume that the competitors are a representitive sample of our audience then we can see what demographics we need to target.
+```SQL
+WITH athletes AS(SELECT distinct on (name)
+				 name, sex, ageclass
+				FROM ipfrecords)
+
+SELECT sex, ageclass, COUNT(*)
+FROM athletes
+WHERE ageclass IS NOT NULL
+GROUP BY sex, ageclass
+ORDER BY ageclass, sex
+```
+[Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/f29711a4f53177471575e4866fde530801d79cd8/Powerlifting%20Sponsorships/agedemo.csv)<br>
+[!alttext](https://github.com/LWhiteF/LewisPortfolio/blob/425c6479976233bb48beea1e8d0c9e34af7e6c7f/Powerlifting%20Sponsorships/age_demo.JPG)
+From our analysis of the age groups of our atheltes, we can see that the age range we should be focusing on is 16-34.
 
 ### Career Length
 It is important to consider how long individuals spend competing in powerlifing, by looking at when an athlete first competed and comparing it with when they most recently competed, and disregarding individuals who only competed once we can take an average. This is important as it gives a rough metric of how often we need to be contracting new talent.
