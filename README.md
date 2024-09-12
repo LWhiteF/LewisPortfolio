@@ -16,4 +16,4 @@ This is a visual presentation project highlighting the cost and scope of manufac
 ## Powerlifting Sponsorship Project SQL
 The aim of this project is to find potential talent for sponsorship within the powerlifting community using IPF historical records<br>
 
-[Powerlifting Sponsorship Project](https://github.com/LWhiteF/LewisPortfolio/blob/142f7670fc730d284e2fe4eff929a179e17ec663/Powerlifting%20Sponsorships/Overview.md)
+[Powerlifting Sponsorship Project](https://github.com/LWhiteF/LewisPortfolio/blob/2ae63e7fd082a08f080a49db0364c3f55b9de714/Powerlifting%20Sponsorships/Overview.md)
