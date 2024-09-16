@@ -206,7 +206,7 @@ GROUP BY sex, ageclass
 ORDER BY ageclass, sex
 ```
 [Outcome](https://github.com/LWhiteF/LewisPortfolio/blob/f29711a4f53177471575e4866fde530801d79cd8/Powerlifting%20Sponsorships/agedemo.csv)<br>
-[!alttext](https://github.com/LWhiteF/LewisPortfolio/blob/425c6479976233bb48beea1e8d0c9e34af7e6c7f/Powerlifting%20Sponsorships/age_demo.JPG)
+![alttext](https://github.com/LWhiteF/LewisPortfolio/blob/425c6479976233bb48beea1e8d0c9e34af7e6c7f/Powerlifting%20Sponsorships/age_demo.JPG)
 From our analysis of the age groups of our atheltes, we can see that the age range we should be focusing on is 16-34.
 
 ### Career Length
