@@ -4,8 +4,8 @@ SELECT sub_cl.*,
 		ELSE FALSE
 		END AS alert
 FROM	(SELECT sub.*,
-				sub.avg_height + 3*sub.stddev_height AS ucl,
-				sub.avg_height - 3*sub.stddev_height AS lcl
+				sub.avg_height + 3*sub.stddev_height/SQRT(5) AS ucl,
+				sub.avg_height - 3*sub.stddev_height/SQRT(5) AS lcl
 		FROM (SELECT operator,
 				ROW_NUMBER() OVER (PARTITION BY operator ORDER BY item_no 
 				ROWS BETWEEN 4 PRECEDING AND CURRENT ROW) AS row_number, 
