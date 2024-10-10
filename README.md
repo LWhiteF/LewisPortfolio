@@ -17,3 +17,8 @@ This is a visual presentation project highlighting the cost and scope of manufac
 [Manufacturing Defects BI file](https://github.com/LWhiteF/LewisPortfolio/blob/9883c8ee522b50cecec560b95856f7de4d19c87b/Manufacturing%20Project/defects.pbix)<br>
 <br>
 [Report View](https://github.com/LWhiteF/LewisPortfolio/blob/142f7670fc730d284e2fe4eff929a179e17ec663/Manufacturing%20Project/Report%20Overview.md)
+
+## Datacamp Scenario Projects
+Short projects found on DataCamp consisting of a scenario and answer<br>
+
+[Evaluate a Manufacturing Process SQL](https://github.com/LWhiteF/LewisPortfolio/blob/6c54ba9ff222d4581fe13ed19454e071f709ccc5/EvaluateManufacturingSQL/overview.md)
