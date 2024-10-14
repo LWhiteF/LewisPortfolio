@@ -331,7 +331,7 @@ FROM (SELECT (c1.close-c1.open) AS bit_change,
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/8.JPG)<br>
 
 ### Visualisations
-To help visualise how closely these prices correlate, I took the data into R to generate graphs for Bitcoin and Ethereum
+To help visualise how closely these prices correlate, I took the data into R to generate graphs for Bitcoin and Ethereum for one year. As we can see, the shape of the closing price graphs for Bitcoin and Ethereum are extremely close, rising and falling in price in approximatly the same place.
 
 ```R
 library(tidyverse)
@@ -366,4 +366,4 @@ ecg <- ggplot(ethereum, aes(x= date, y=close, colour = EthereumChange, group = g
 
 bcg + ecg
 ```
-
+![alttext](https://github.com/LWhiteF/LewisPortfolio/blob/2b11be1f8da045c264bc70a6dd8c4f3b94422453/Crypto%20project/Results/graphs.png)
