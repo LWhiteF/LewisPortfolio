@@ -6,7 +6,7 @@ The aim of this project is to find potential talent for sponsorship within the p
 
 [Powerlifting Sponsorship Project](https://github.com/LWhiteF/LewisPortfolio/blob/062611bc34b617949a1890b1cc089baa78b9274e/Powerlifting%20Sponsorships/Overview.md)
 
-## Cryptocurrencies Investment strategy project SQL
+## Cryptocurrencies Investment strategy project SQL + R visualisations
 The aim of this project is to attempt to find a solution for an investment strategy in an extremely volatile market.<br>
 
 [Cryptocurrencies SQL Project Overview](https://github.com/LWhiteF/LewisPortfolio/blob/18aeff4c1fec31bbf82a75f89a2ba09acdefa4b5/Crypto%20project/Overview.md)
