@@ -328,4 +328,42 @@ FROM (SELECT (c1.close-c1.open) AS bit_change,
 	    ON c1.date = c3.date
 		WHERE c1.crypto_name = 'Bitcoin' AND c2.crypto_name = 'Ethereum' AND c3.crypto_name = 'Ethereum Classic';
 ```
-![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/8.JPG)
+![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/2ac21a817198c30b12d76b02f0c2ec3f2018a855/Crypto%20project/Results/8.JPG)<br>
+
+### Visualisations
+To help visualise how closely these prices correlate, I took the data into R to generate graphs for Bitcoin and Ethereum
+
+```R
+library(tidyverse)
+library(lubridate)
+library(patchwork)
+library(hrbrthemes)
+
+crypto <- read.csv("C:\\Users\\lewis\\Documents\\data\\cryptodata.csv")
+crypto <- crypto%>% mutate(date = ymd(date))
+
+bitcoin <- crypto %>% filter(crypto_name == "Bitcoin" , date >= "2021-10-23") %>% select(crypto_name, date, close)
+ethereum <- crypto %>% filter(crypto_name == "Ethereum" , date >= "2021-10-23") %>% select(crypto_name, date, close)
+
+bitcoin <- bitcoin %>% mutate(BitcoinChange = close > lead(close),
+           group = "1")
+ethereum <- ethereum %>% mutate(EthereumChange = close > lead(close),
+           group = "1")
+
+bcg <- ggplot(bitcoin, aes(x= date, y=close, colour = BitcoinChange, group = group)) +
+		geom_line()+
+		scale_color_manual(values = c("#CC6666","#9999CC"), na.value = "white",
+                       labels = c("Increase", "Decrease", ""))
+		theme_ipsum()+
+		ggtitle("Bitcoin")
+
+ecg <- ggplot(ethereum, aes(x= date, y=close, colour = EthereumChange, group = group)) +
+		geom_line()+
+		scale_color_manual(values = c("#CC6666","#9999CC"), na.value = "white",
+                       labels = c("Increase", "Decrease", ""))
+		theme_ipsum()+
+		ggtitle("ethereum")
+
+bcg + ecg
+```
+
