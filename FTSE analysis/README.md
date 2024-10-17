@@ -40,7 +40,7 @@ with open(csv_file, mode='w', newline='') as file:
     writer = csv.writer(file)
     
     # Write the header row
-    writer.writerow(["Timestamp", "Short Name", "Long Name", "Price", "Change"])
+    writer.writerow(["timestamp", "shortname", "longname", "price", "change"])
     
     # Write the data rows
     for table_element in table_elements:
