@@ -3,6 +3,7 @@ Portfolio of Data Analytics Projects
 
 ## FTSE Analysis Python
 Ongoing project to scrape, and then analyse FTSE100 data using python.<br>
+
 [FTSE Analysis Project](https://github.com/LWhiteF/LewisPortfolio/blob/5c6dfc56db997bfa61d563e0ef616c0039ec25a6/FTSE%20analysis/README.md)
 
 ## Powerlifting Sponsorship Project SQL
