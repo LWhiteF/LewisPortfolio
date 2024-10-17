@@ -21,4 +21,4 @@ This is a visual presentation project highlighting the cost and scope of manufac
 ## Datacamp Scenario Projects
 Short projects found on DataCamp consisting of a scenario and answer<br>
 
-[Evaluate a Manufacturing Process SQL](https://github.com/LWhiteF/LewisPortfolio/blob/6c54ba9ff222d4581fe13ed19454e071f709ccc5/EvaluateManufacturingSQL/overview.md)
+[Evaluate a Manufacturing Process SQL](https://github.com/LWhiteF/LewisPortfolio/blob/0319b6a45238d109e67c89e5d4431e5f0b6c3402/EvaluateManufacturingSQL/README.md)
