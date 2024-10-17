@@ -4,7 +4,7 @@ Portfolio of Data Analytics Projects
 ## Powerlifting Sponsorship Project SQL
 The aim of this project is to find potential talent for sponsorship within the powerlifting community using IPF historical records<br>
 
-[Powerlifting Sponsorship Project](https://github.com/LWhiteF/LewisPortfolio/blob/062611bc34b617949a1890b1cc089baa78b9274e/Powerlifting%20Sponsorships/Overview.md)
+[Powerlifting Sponsorship Project](https://github.com/LWhiteF/LewisPortfolio/blob/7909d2df901a1720bec341284b7b941e8b2c5d52/Powerlifting%20Sponsorships/README.md)
 
 ## Cryptocurrencies Investment strategy project SQL + R visualisations
 The aim of this project is to attempt to find a solution for an investment strategy in an extremely volatile market.<br>
