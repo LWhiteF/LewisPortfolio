@@ -365,7 +365,7 @@ plt.ylabel('Price')
 plt.legend()
 plt.show()
 ```
-![alt text]
+![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/0079234168ef451927b91ff48e7caac0d5d2b226/Crypto%20project/Results/BMA.png)
 ```python
 # Read the Ethereum CSV file
 ethereum_data = pd.read_csv('ethereum.csv')
@@ -394,7 +394,7 @@ plt.ylabel('Price')
 plt.legend()
 plt.show()
 ```
-![alt text]
+![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/0079234168ef451927b91ff48e7caac0d5d2b226/Crypto%20project/Results/EMA.png)
 ```python
 # Convert 'date' columns to datetime if they are not already
 ethereum_data['date'] = pd.to_datetime(ethereum_data['date'])
@@ -422,7 +422,7 @@ plt.title('Bitcoin vs Ethereum 200-Day Moving Averages')
 fig.tight_layout()
 plt.show()
 ```
-![alt text]
+![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/0079234168ef451927b91ff48e7caac0d5d2b226/Crypto%20project/Results/BE200.png)
 ```python
 # Convert 'date' columns to datetime if they are not already
 ethereum_data['date'] = pd.to_datetime(ethereum_data['date'])
@@ -430,7 +430,7 @@ bitcoin_data['date'] = pd.to_datetime(bitcoin_data['date'])
 
 fig, ax1 = plt.subplots(figsize=(10, 6))
 
-# Plot Ethereum 200-Day Moving Average
+# Plot Ethereum 50-Day Moving Average
 ax1.plot(ethereum_data['date'], ethereum_data['MA_50'], label='Ethereum 50-Day Moving Average', color='red')
 ax1.set_xlabel('Date')
 ax1.set_ylabel('Ethereum Price', color='red')
@@ -450,7 +450,7 @@ plt.title('Bitcoin vs Ethereum 50-Day Moving Averages')
 fig.tight_layout()
 plt.show()
 ```
-![alt text]
+![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/0079234168ef451927b91ff48e7caac0d5d2b226/Crypto%20project/Results/BE50.png)
 ```pyton
 # Convert 'date' columns to datetime if they are not already
 ethereum_data['date'] = pd.to_datetime(ethereum_data['date'])
@@ -458,7 +458,7 @@ bitcoin_data['date'] = pd.to_datetime(bitcoin_data['date'])
 
 fig, ax1 = plt.subplots(figsize=(10, 6))
 
-# Plot Ethereum 200-Day Moving Average
+# Plot Ethereum 7-Day Moving Average
 ax1.plot(ethereum_data['date'], ethereum_data['MA_7'], label='Ethereum 7-Day Moving Average', color='red')
 ax1.set_xlabel('Date')
 ax1.set_ylabel('Ethereum Price', color='red')
@@ -478,4 +478,7 @@ plt.title('Bitcoin vs Ethereum 7-Day Moving Averages')
 fig.tight_layout()
 plt.show()
 ```
-![alt text]
+![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/0079234168ef451927b91ff48e7caac0d5d2b226/Crypto%20project/Results/BE7.png)
+
+### Conclusion
+While Bitcoin, and cryptocurrencies generally, are a significantly volatile market, we can use the price changes in Bitcoin to predict changes in Ethereum. These currencies are extremely closely correlated in their price changes, especially on a 7 day moving average. Ethereums price changes mirror that of Bitcoin, though offset by a few days. We can use this infomation to manipulate our Ethereum holdings. if we see the price of bitcoin jump significantly, we should make a large Ethereum buy, expecting Ethereum to mirror Bitcoin's large price jump shortly after. Equally, if we see a significant downturn in Bitcoin prices, we should sell our Ethereum holdings.
