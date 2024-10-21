@@ -333,37 +333,149 @@ FROM (SELECT (c1.close-c1.open) AS bit_change,
 ### Visualisations
 To help visualise how closely these prices correlate, I took the data into R to generate graphs for Bitcoin and Ethereum for one year. As we can see, the shape of the closing price graphs for Bitcoin and Ethereum are extremely close, rising and falling in price in approximatly the same place.
 
-```R
-library(tidyverse)
-library(lubridate)
-library(patchwork)
-library(hrbrthemes)
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
-crypto <- read.csv("C:\\Users\\lewis\\Documents\\data\\cryptodata.csv")
-crypto <- crypto%>% mutate(date = ymd(date))
+# Read the Bitcoin CSV file
+bitcoin_data = pd.read_csv('bitcoin.csv')
 
-bitcoin <- crypto %>% filter(crypto_name == "Bitcoin" , date >= "2021-10-23") %>% select(crypto_name, date, close)
-ethereum <- crypto %>% filter(crypto_name == "Ethereum" , date >= "2021-10-23") %>% select(crypto_name, date, close)
+# Display the first few rows of the dataframe
+bitcoin_data.head()
 
-bitcoin <- bitcoin %>% mutate(BitcoinChange = close > lead(close),
-           group = "1")
-ethereum <- ethereum %>% mutate(EthereumChange = close > lead(close),
-           group = "1")
+# Convert 'date' columns to datetime if they are not already
+bitcoin_data['date'] = pd.to_datetime(bitcoin_data['date'])
 
-bcg <- ggplot(bitcoin, aes(x= date, y=close, colour = BitcoinChange, group = group)) +
-		geom_line()+
-		scale_color_manual(values = c("#CC6666","#9999CC"), na.value = "white",
-                       labels = c("Increase", "Decrease", ""))
-		theme_ipsum()+
-		ggtitle("Bitcoin")
+# Define 50 day and 200 day moving averages
+bitcoin_data['MA_7'] = bitcoin_data['close'].rolling(window=7).mean()
+bitcoin_data['MA_50'] = bitcoin_data['close'].rolling(window=50).mean()
+bitcoin_data['MA_200'] = bitcoin_data['close'].rolling(window=200).mean()
 
-ecg <- ggplot(ethereum, aes(x= date, y=close, colour = EthereumChange, group = group)) +
-		geom_line()+
-		scale_color_manual(values = c("#CC6666","#9999CC"), na.value = "white",
-                       labels = c("Increase", "Decrease", ""))
-		theme_ipsum()+
-		ggtitle("ethereum")
 
-bcg + ecg
+# Plot lin graph comparing close, MA_50 and MA_200
+plt.figure(figsize=(10, 6))
+plt.plot(bitcoin_data['date'], bitcoin_data['close'], label='Closing Price', color='blue')
+plt.plot(bitcoin_data['date'], bitcoin_data['MA_50'], label='50-Day Moving Average', color='orange')
+plt.plot(bitcoin_data['date'], bitcoin_data['MA_200'], label='200-Day Moving Average', color='red')
+
+plt.title('Bitcoin Price with Moving Averages')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend()
+plt.show()
 ```
-![alttext](https://github.com/LWhiteF/LewisPortfolio/blob/2b11be1f8da045c264bc70a6dd8c4f3b94422453/Crypto%20project/Results/graphs.png)
+![alt text]
+```python
+# Read the Ethereum CSV file
+ethereum_data = pd.read_csv('ethereum.csv')
+
+# Convert 'date' columns to datetime if they are not already
+ethereum_data['date'] = pd.to_datetime(ethereum_data['date'])
+bitcoin_data['date'] = pd.to_datetime(bitcoin_data['date'])
+
+# Display the first few rows of the dataframe
+ethereum_data.head()
+
+# Define 50 day and 200 day moving averages
+ethereum_data['MA_7'] = ethereum_data['close'].rolling(window=7).mean()
+ethereum_data['MA_50'] = ethereum_data['close'].rolling(window=50).mean()
+ethereum_data['MA_200'] = ethereum_data['close'].rolling(window=200).mean()
+
+# Plot line graph comparing close, MA_50 and MA_200
+plt.figure(figsize=(10, 6))
+plt.plot(ethereum_data['date'], ethereum_data['close'], label='Closing Price', color='blue')
+plt.plot(ethereum_data['date'], ethereum_data['MA_50'], label='50-Day Moving Average', color='orange')
+plt.plot(ethereum_data['date'], ethereum_data['MA_200'], label='200-Day Moving Average', color='red')
+
+plt.title('Ethereum Price with Moving Averages')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend()
+plt.show()
+```
+![alt text]
+```python
+# Convert 'date' columns to datetime if they are not already
+ethereum_data['date'] = pd.to_datetime(ethereum_data['date'])
+bitcoin_data['date'] = pd.to_datetime(bitcoin_data['date'])
+
+fig, ax1 = plt.subplots(figsize=(10, 6))
+
+# Plot Ethereum 200-Day Moving Average
+ax1.plot(ethereum_data['date'], ethereum_data['MA_200'], label='Ethereum 200-Day Moving Average', color='red')
+ax1.set_xlabel('Date')
+ax1.set_ylabel('Ethereum Price', color='red')
+ax1.tick_params(axis='y', labelcolor='red')
+
+# Format x-axis to show only the year
+ax1.xaxis.set_major_locator(mdates.YearLocator())
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+
+# Create a second y-axis for Bitcoin
+ax2 = ax1.twinx()
+ax2.plot(bitcoin_data['date'], bitcoin_data['MA_200'], label='Bitcoin 200-Day Moving Average', color='blue')
+ax2.set_ylabel('Bitcoin Price', color='blue')
+ax2.tick_params(axis='y', labelcolor='blue')
+
+plt.title('Bitcoin vs Ethereum 200-Day Moving Averages')
+fig.tight_layout()
+plt.show()
+```
+![alt text]
+```python
+# Convert 'date' columns to datetime if they are not already
+ethereum_data['date'] = pd.to_datetime(ethereum_data['date'])
+bitcoin_data['date'] = pd.to_datetime(bitcoin_data['date'])
+
+fig, ax1 = plt.subplots(figsize=(10, 6))
+
+# Plot Ethereum 200-Day Moving Average
+ax1.plot(ethereum_data['date'], ethereum_data['MA_50'], label='Ethereum 50-Day Moving Average', color='red')
+ax1.set_xlabel('Date')
+ax1.set_ylabel('Ethereum Price', color='red')
+ax1.tick_params(axis='y', labelcolor='red')
+
+# Format x-axis to show only the year
+ax1.xaxis.set_major_locator(mdates.YearLocator())
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+
+# Create a second y-axis for Bitcoin
+ax2 = ax1.twinx()
+ax2.plot(bitcoin_data['date'], bitcoin_data['MA_50'], label='Bitcoin 50-Day Moving Average', color='blue')
+ax2.set_ylabel('Bitcoin Price', color='blue')
+ax2.tick_params(axis='y', labelcolor='blue')
+
+plt.title('Bitcoin vs Ethereum 50-Day Moving Averages')
+fig.tight_layout()
+plt.show()
+```
+![alt text]
+```pyton
+# Convert 'date' columns to datetime if they are not already
+ethereum_data['date'] = pd.to_datetime(ethereum_data['date'])
+bitcoin_data['date'] = pd.to_datetime(bitcoin_data['date'])
+
+fig, ax1 = plt.subplots(figsize=(10, 6))
+
+# Plot Ethereum 200-Day Moving Average
+ax1.plot(ethereum_data['date'], ethereum_data['MA_7'], label='Ethereum 7-Day Moving Average', color='red')
+ax1.set_xlabel('Date')
+ax1.set_ylabel('Ethereum Price', color='red')
+ax1.tick_params(axis='y', labelcolor='red')
+
+# Format x-axis to show only the year
+ax1.xaxis.set_major_locator(mdates.YearLocator())
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+
+# Create a second y-axis for Bitcoin
+ax2 = ax1.twinx()
+ax2.plot(bitcoin_data['date'], bitcoin_data['MA_7'], label='Bitcoin 7-Day Moving Average', color='blue')
+ax2.set_ylabel('Bitcoin Price', color='blue')
+ax2.tick_params(axis='y', labelcolor='blue')
+
+plt.title('Bitcoin vs Ethereum 7-Day Moving Averages')
+fig.tight_layout()
+plt.show()
+```
+![alt text]
