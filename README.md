@@ -14,7 +14,7 @@ The aim of this project is to find potential talent for sponsorship within the p
 ## Cryptocurrencies Investment strategy project SQL + Python
 The aim of this project is to attempt to find a solution for an investment strategy in an extremely volatile market.<br>
 
-[Cryptocurrencies Project Overview](https://github.com/LWhiteF/LewisPortfolio/blob/f5641fd7c2bd25b5f6e80bdde32d9d9e214d3de8/Crypto%20project/README.md)
+[Cryptocurrencies Project Overview](https://github.com/LWhiteF/LewisPortfolio/blob/491d5e2d8b6d7d652cf2a55a44975f1f15bfcfb0/Crypto%20project/README.md)
 
 ## Manufaturing Defects Report PowerBi
 This is a visual presentation project highlighting the cost and scope of manufacturing defects.<br>
