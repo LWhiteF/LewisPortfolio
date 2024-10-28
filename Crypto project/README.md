@@ -480,5 +480,57 @@ plt.show()
 ```
 ![alt text](https://github.com/LWhiteF/LewisPortfolio/blob/0079234168ef451927b91ff48e7caac0d5d2b226/Crypto%20project/Results/BE7.png)
 
-### Conclusion
-While Bitcoin, and cryptocurrencies generally, are a significantly volatile market, we can use the price changes in Bitcoin to predict changes in Ethereum. These currencies are extremely closely correlated in their price changes, especially on a 7 day moving average. Ethereums price changes mirror that of Bitcoin, though offset by a few days. We can use this infomation to manipulate our Ethereum holdings. if we see the price of bitcoin jump significantly, we should make a large Ethereum buy, expecting Ethereum to mirror Bitcoin's large price jump shortly after. Equally, if we see a significant downturn in Bitcoin prices, we should sell our Ethereum holdings.
+### Prediction
+While Bitcoin, and cryptocurrencies generally, are a significantly volatile market, we can use the price changes in Bitcoin to predict changes in Ethereum. These currencies are extremely closely correlated in their price changes, especially on a 7 day moving average. Ethereums price changes mirror that of Bitcoin, though offset by a few days. We can use this infomation to manipulate our Ethereum holdings. if we see the price of bitcoin jump significantly, we should make a large Ethereum buy, expecting Ethereum to mirror Bitcoin's large price jump shortly after. Equally, if we see a significant downturn in Bitcoin prices, we should sell our Ethereum holdings.<br>
+<br>
+Below we bulit a model to test this hypothesis.
+
+```python
+# Initialize variables
+initial_investment = 100
+ethereum_investment = initial_investment
+ethereum_holdings = 0
+
+# Find the starting index for 30 July 2015
+start_date = '2015-07-30'
+start_index = bitcoin_data[bitcoin_data['date'] == start_date].index[0]
+
+# Initialize the previous Bitcoin price
+bitcoin_price_prev = bitcoin_data['MA_7'].iloc[start_index]
+
+# Initialize a list to store weekly investment values
+weekly_investment_values = []
+
+# Iterate through the data starting from the start_index
+for i in range(start_index + 1, min(len(bitcoin_data), len(ethereum_data))):
+    bitcoin_price_current = bitcoin_data['MA_7'].iloc[i]
+    ethereum_price_current = ethereum_data['MA_7'].iloc[i]
+    
+    # Calculate the percentage change in Bitcoin price
+    price_change = (bitcoin_price_current - bitcoin_price_prev) / bitcoin_price_prev * 100
+    
+    # Buy Ethereum if Bitcoin price increases by 5%
+    if price_change >= 5 and ethereum_investment > 0:
+        ethereum_holdings += ethereum_investment / ethereum_price_current
+        ethereum_investment = 0
+    
+    # Sell Ethereum if Bitcoin price drops by 10%
+    elif price_change <= -10 and ethereum_holdings > 0:
+        ethereum_investment += ethereum_holdings * ethereum_price_current
+        ethereum_holdings = 0
+    
+    # Update the previous Bitcoin price
+    bitcoin_price_prev = bitcoin_price_current
+    
+    # Check if the current date is the end of a week (i.e., Sunday)
+    if bitcoin_data['date'].iloc[i].weekday() == 6:
+        # Calculate the current value of the investment
+        current_value = ethereum_investment + (ethereum_holdings * ethereum_price_current)
+        weekly_investment_values.append((bitcoin_data['date'].iloc[i], current_value))
+
+# Convert the list to a DataFrame for better visualization
+weekly_investment_df = pd.DataFrame(weekly_investment_values, columns=['Date', 'Investment Value'])
+
+weekly_investment_df
+```
+
